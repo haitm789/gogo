@@ -7,15 +7,7 @@ import (
   "github.com/gofiber/fiber/v2"
 )
 
-type (
-  router struct {}
-)
-
-func NewRouter() router {
-  return router{}
-}
-
-func (s *router) Apply(app *fiber.App) {
+func Apply(app *fiber.App) {
   gr := []domain.Group{}
 
   gr = append(gr, v1.Routes())

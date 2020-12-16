@@ -1,26 +1,26 @@
 package router
 
 import (
-  "api/infra/server/router/domain"
-  "api/infra/server/router/v1"
+	"api/infra/server/router/domain"
+	v1 "api/infra/server/router/v1"
 
-  "github.com/gofiber/fiber/v2"
+	fiber "github.com/gofiber/fiber/v2"
 )
 
 func Apply(app *fiber.App) {
-  gr := []domain.Group{}
+	gr := []domain.Group{}
 
-  gr = append(gr, v1.Routes())
+	gr = append(gr, v1.Routes())
 
-  for _, g := range gr {
-    r := app.Group(g.Prefix)
+	for _, g := range gr {
+		r := app.Group(g.Prefix)
 
-    for _, rt := range g.Routes {
-      switch rt.Method {
-      case "GET":
-        r.Get(rt.URL, rt.Handler)
-      default:
-      }
-    }
-  }
+		for _, rt := range g.Routes {
+			switch rt.Method {
+			case "GET":
+				r.Get(rt.URL, rt.Handler)
+			default:
+			}
+		}
+	}
 }

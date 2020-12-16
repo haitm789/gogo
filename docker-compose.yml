@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/golang/Dockerfile
     ports:
-      - 3000:3000
+      - 4000:4000
     command: air
     volumes:
       - ./src:/app/src

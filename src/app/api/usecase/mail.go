@@ -1,25 +1,21 @@
 package usecase
 
 import (
-	_ "context" //ctx context.Context
+	"fmt"
 )
 
-// type Usecase interface {
-// 	Do(Ctx context.Context)
-// }
+type (
+	mail struct{}
+)
 
-type mail struct {}
-
-func NewMail() *mail {
-	return &mail{}
+func NewMail() mail {
+	return mail{}
 }
 
-func (u *mail) Get() interface{} {
-	r := map[string]interface{}{
-		"success": 5, 
-		"message": "test",
+func (m *mail) List() map[string]string {
+	fmt.Println("uc")
+	r := map[string]string{
+		"message": "ok",
 	}
-	return r;
+	return r
 }
-
-// interface{} 

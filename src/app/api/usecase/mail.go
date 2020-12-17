@@ -1,25 +1,29 @@
 package usecase
 
 import (
-	_ "context" //ctx context.Context
+	"api/domain"
 )
 
-// type Usecase interface {
-// 	Do(Ctx context.Context)
-// }
-
-type mail struct {}
-
-func NewMail() *mail {
-	return &mail{}
+type Mail struct {
+	repo MailRepo
 }
 
-func (u *mail) Get() interface{} {
+func NewMail(repo MailRepo) Mail {
+	return Mail{
+		repo: repo,
+	}
+}
+
+func (u *Mail) Test() interface{} {
 	r := map[string]interface{}{
-		"success": 5, 
+		"success": 7,
 		"message": "test",
 	}
-	return r;
+
+	return r
 }
 
-// interface{} 
+func (u *Mail) Get(id int) domain.Mail {
+	r2, _ := u.repo.GetByID(id)
+	return r2
+}

@@ -1,7 +1,7 @@
 package v1
 
 import (
-  "api/infra/server/router/domain"
+	"api/infra/rest/router/domain"
 )
 
 func Routes() domain.Group {

@@ -9,11 +9,11 @@ import (
 )
 
 type (
-	mail struct {
+	user struct {
 		uc usecase.Mail
 	}
 
-	listMailResponse struct {
+	getUserResponse struct {
 		ID     int               `json:"id"`
 		Name   string            `json:"name"`
 		Status domain.MailStatus `json:"status"`
@@ -22,21 +22,23 @@ type (
 	}
 )
 
-func NewMail(uc usecase.Mail) *mail {
-	return &mail{
+func NewUser(uc usecase.Mail) *user {
+	return &user{
 		uc: uc,
 	}
 }
 
-func (m *mail) List(c rest.Context) error {
-	r := m.uc.Get(9)
+func (m *user) User(c rest.Context) error {
+	name := c.Params("name")
 
-	res := listMailResponse{
+	r := m.uc.Get(10)
+
+	res := getUserResponse{
 		ID:     r.GetID(),
-		Name:   "testing",
+		Name:   name,
 		Status: r.GetStatus(),
 		SendAt: r.GetSendAt(),
 		DoneAt: r.GetDoneAt(),
 	}
-	return c.Status(200).JSON(&res)
+	return c.Status(202).JSON(&res)
 }

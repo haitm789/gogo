@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"api/adapter/rest"
 	"api/domain"
-	"api/interface/rest"
 	"api/usecase"
 
 	"time"

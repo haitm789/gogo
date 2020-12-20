@@ -12,18 +12,21 @@ services:
       - ./src:/app/src
     working_dir: /app/src/app/api
     tty: true
-  # mysql:
-  #   container_name: gogo-mysql
-  #   image: mysql:5.7.22
-  #   volumes:
-  #     - ./docker/mysql/:/docker-entrypoint-initdb.d/
-  #     - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-  #     - ./tmp/mysql/data:/var/lib/mysql
-  #   environment:
-  #     - MYSQL_DATABASE=gogo
-  #     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-  #   ports:
-  #     - 3306:3306
+  mysql:
+    container_name: gogo-mysql
+    image: mysql:5.7.22
+    volumes:
+      - ./docker/mysql/:/docker-entrypoint-initdb.d/
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./tmp/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: gogo
+      # MYSQL_ALLOW_EMPTY_PASSWORD:yes
+      MYSQL_USER: pandog
+      MYSQL_PASSWORD: pandog
+      MYSQL_ROOT_PASSWORD: pandog
+    ports:
+      - 3306:3306
   # mongo:
   #   image: mongo:3.7.5
   #   ports:

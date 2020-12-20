@@ -1,6 +1,8 @@
 package router
 
 import (
+	"api/adapter"
+	"api/infra/database"
 	"api/infra/rest/router/domain"
 	v1 "api/infra/rest/router/v1"
 
@@ -10,7 +12,8 @@ import (
 func Apply(app *fiber.App) {
 	gr := []domain.Group{}
 
-	gr = append(gr, v1.Routes())
+	db := db()
+	gr = append(gr, v1.Routes(db))
 
 	for _, g := range gr {
 		r := app.Group(g.Prefix)
@@ -23,4 +26,8 @@ func Apply(app *fiber.App) {
 			}
 		}
 	}
+}
+
+func db() adapter.Database {
+	return database.NewMySql()
 }

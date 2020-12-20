@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"api/adapter/rest"
 	"api/domain"
-	"api/interface/rest"
 	"api/usecase"
 
 	"time"
@@ -28,9 +28,20 @@ func NewMail(uc usecase.Mail) *mail {
 	}
 }
 
+// func testDb() {
+// 	db := database.NewMySql()
+// 	c := db.Connect()
+
+// 	res := []domain.Mail{}
+// 	c.
+// 		Table("mails").
+// 		Where("send_at <= NOW() AND status = ?", 1).
+// 		Find(&res)
+// }
+
 func (m *mail) List(c rest.Context) error {
 	r := m.uc.Get(9)
-
+	// testDb()
 	res := listMailResponse{
 		ID:     r.GetID(),
 		Name:   "testing",

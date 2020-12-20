@@ -2,28 +2,20 @@ package usecase
 
 import (
 	"api/domain"
+	repository "api/repo"
 )
 
 type Mail struct {
-	repo MailRepo
+	repo repository.Mail
 }
 
-func NewMail(repo MailRepo) Mail {
+func NewMail(repo repository.Mail) Mail {
 	return Mail{
 		repo: repo,
 	}
 }
 
-func (u *Mail) Test() interface{} {
-	r := map[string]interface{}{
-		"success": 7,
-		"message": "test",
-	}
-
-	return r
-}
-
 func (u *Mail) Get(id int) domain.Mail {
-	r2, _ := u.repo.GetByID(id)
-	return r2
+	r, _ := u.repo.GetByID(id)
+	return r
 }

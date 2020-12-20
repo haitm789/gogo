@@ -7,21 +7,23 @@ import (
 )
 
 type MailRepo struct {
+	table string
 	db adapter.Database
 }
 
 func NewMail(db adapter.Database) MailRepo {
 	return MailRepo{
+		table: "mails"
 		db: db,
 	}
 }
 
-func (repo MailRepo) GetByID(id int) (domain.Mail, error) {
+func (r *MailRepo) GetByID(id int) (domain.Mail, error) {
 	res := []domain.Mail{}
 
-	repo.db.
+	r.db.
 		Connection().
-		Table("mails").
+		Table(r.table).
 		Where("send_at <= NOW() AND status = ?", 1).
 		Find(&res)
 

@@ -3,22 +3,23 @@ package repo
 import (
 	"api/adapter"
 	"api/domain"
+
 	"time"
 )
 
-type MailRepo struct {
+type Mail struct {
 	table string
-	db adapter.Database
+	db    adapter.Database
 }
 
-func NewMail(db adapter.Database) MailRepo {
-	return MailRepo{
-		table: "mails"
-		db: db,
+func NewMail(db adapter.Database) Mail {
+	return Mail{
+		table: "mails",
+		db:    db,
 	}
 }
 
-func (r *MailRepo) GetByID(id int) (domain.Mail, error) {
+func (r Mail) GetByID(id int) (domain.Mail, error) {
 	res := []domain.Mail{}
 
 	r.db.

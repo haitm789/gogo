@@ -9,7 +9,7 @@ import (
 )
 
 type (
-	mail struct {
+	Mail struct {
 		uc usecase.Mail
 	}
 
@@ -22,26 +22,14 @@ type (
 	}
 )
 
-func NewMail(uc usecase.Mail) *mail {
-	return &mail{
+func NewMail(uc usecase.Mail) Mail {
+	return Mail{
 		uc: uc,
 	}
 }
 
-// func testDb() {
-// 	db := database.NewMySql()
-// 	c := db.Connect()
-
-// 	res := []domain.Mail{}
-// 	c.
-// 		Table("mails").
-// 		Where("send_at <= NOW() AND status = ?", 1).
-// 		Find(&res)
-// }
-
-func (m *mail) List(c rest.Context) error {
+func (m *Mail) List(c rest.Context) error {
 	r := m.uc.Get(9)
-	// testDb()
 	res := listMailResponse{
 		ID:     r.GetID(),
 		Name:   "testing",

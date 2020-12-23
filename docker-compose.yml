@@ -9,8 +9,8 @@ services:
       - 4000:4000
     command: air
     volumes:
-      - ./src:/app/src
-    working_dir: /app/src/app/api
+      - ./src/app/api:/app/src
+    working_dir: /app/src
     tty: true
   mysql:
     container_name: gogo-mysql

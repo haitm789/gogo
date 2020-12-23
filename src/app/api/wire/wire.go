@@ -1,6 +1,5 @@
 //+build wireinject
 
-//https://itnext.io/mastering-wire-f1226717bbac
 package wire
 
 import (
@@ -9,7 +8,7 @@ import (
 	"api/adapter/repo"
 	"api/adapter/rest/handler"
 
-	irepo "api/repo"
+	repositroy "api/repo"
 	"api/usecase"
 
 	"github.com/google/wire"
@@ -20,7 +19,7 @@ func InitializeMailHandler(db adapter.Database) handler.Mail {
 		handler.NewMail,
 		repo.NewMail,
 		usecase.NewMail,
-		wire.Bind(new(irepo.Mail), new(repo.Mail)),
+		wire.Bind(new(repositroy.Mail), new(repo.Mail)),
 	)
 
 	return handler.Mail{}

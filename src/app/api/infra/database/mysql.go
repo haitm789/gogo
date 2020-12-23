@@ -24,18 +24,9 @@ func (m *mysql) Connection() *gorm.DB {
 }
 
 func connect() *gorm.DB {
-	dc, err := loadConfig()
-	if err != nil {
-		panic(err.Error())
-	}
-	DBMS := dc.DbMs
-	USER := dc.User
-	PASS := dc.Pass
-	PROTOCOL := fmt.Sprintf("tcp(%s:%s)", dc.Host, dc.Port)
-	DBNAME := dc.DbName
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?parseTime=true&loc=Local"
-	fmt.Println("db connect:", CONNECT)
-	db, err := gorm.Open(DBMS, CONNECT)
+	dialect, conn := conn()
+
+	db, err := gorm.Open(dialect, conn)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -43,21 +34,22 @@ func connect() *gorm.DB {
 	return db
 }
 
-type config struct {
-	DbMs   string
-	User   string
-	Pass   string
-	DbName string
-	Host   string
-	Port   string
-}
+func conn() (string, string) {
+	dialect := os.Getenv("DB_DIALECT")
+	username := os.Getenv("DB_USERNAME")
+	password := os.Getenv("DB_PASSWORD")
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	database := os.Getenv("DB_DATABASE")
 
-func loadConfig() (dc config, err error) {
-	dc.DbMs = "mysql"
-	dc.DbName = os.Getenv("DB_NAME")
-	dc.User = os.Getenv("DB_USER")
-	dc.Pass = os.Getenv("DB_PASSWORD")
-	dc.Host = os.Getenv("DB_HOST")
-	dc.Port = os.Getenv("DB_PORT")
-	return dc, nil
+	conn := fmt.Sprintf(
+		"%s:%s@tcp(%s:%s)/%s?parseTime=true&loc=Local",
+		username,
+		password,
+		host,
+		port,
+		database,
+	)
+
+	return dialect, conn
 }

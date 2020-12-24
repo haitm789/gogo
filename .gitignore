@@ -1,4 +1,4 @@
-src/app/api/vendor
+src/app/*/vendor
 znote
 zref
 tmp

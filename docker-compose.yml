@@ -1,32 +1,60 @@
 version: "3.3"
 services:
-  app:
-    container_name: gogo-app
+  # app:
+  #   container_name: gogo-app
+  #   build:
+  #     context: .
+  #     dockerfile: docker/golang/Dockerfile
+  #   ports:
+  #     - 4000:4000
+  #   command: air
+  #   volumes:
+  #     - ./src:/app/src
+  #   working_dir: /app/src
+  #   tty: true
+  # app-api:
+  #   container_name: gogo-app-api
+  #   build:
+  #     context: .
+  #     dockerfile: docker/golang/Dockerfile
+  #   ports:
+  #     - 4001:4001
+  #   command: air
+  #   volumes:
+  #     - ./src/app/api:/app/src
+  #   working_dir: /app/src
+  #   tty: true
+  #   depends_on:
+  #     - mysql
+  app-cli:
+    container_name: gogo-app-cli
     build:
       context: .
       dockerfile: docker/golang/Dockerfile
     ports:
-      - 4000:4000
+      - 3000:3000
     command: air
     volumes:
-      - ./src/app/api:/app/src
+      - ./src/app/cli:/app/src
     working_dir: /app/src
     tty: true
-  mysql:
-    container_name: gogo-mysql
-    image: mysql:5.7.22
-    volumes:
-      - ./docker/mysql/:/docker-entrypoint-initdb.d/
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./tmp/mysql/data:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: gogo
-      # MYSQL_ALLOW_EMPTY_PASSWORD:yes
-      MYSQL_USER: pandog
-      MYSQL_PASSWORD: pandog
-      MYSQL_ROOT_PASSWORD: pandog
-    ports:
-      - 3306:3306
+    # depends_on:
+    #   - mysql
+  # mysql:
+  #   container_name: gogo-mysql
+  #   image: mysql:5.7.22
+  #   volumes:
+  #     - ./docker/mysql/:/docker-entrypoint-initdb.d/
+  #     - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+  #     - ./tmp/mysql/data:/var/lib/mysql
+  #   environment:
+  #     MYSQL_DATABASE: gogo
+  #     # MYSQL_ALLOW_EMPTY_PASSWORD:yes
+  #     MYSQL_USER: pandog
+  #     MYSQL_PASSWORD: pandog
+  #     MYSQL_ROOT_PASSWORD: pandog
+  #   ports:
+  #     - 3306:3306
   # mongo:
   #   image: mongo:3.7.5
   #   ports:

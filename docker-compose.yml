@@ -26,20 +26,20 @@ services:
     tty: true
     depends_on:
       - mysql
-  # app-cli:
-  #   container_name: gogo-app-cli
-  #   build:
-  #     context: .
-  #     dockerfile: docker/golang/Dockerfile
-  #   # ports:
-  #   #   - 3000:3000
-  #   command: air
-  #   volumes:
-  #     - ./src/app/cli:/app/src
-  #   working_dir: /app/src
-  #   tty: true
-  #   # depends_on:
-  #   #   - mysql
+  app-cli:
+    container_name: gogo-app-cli
+    build:
+      context: .
+      dockerfile: docker/golang/Dockerfile
+    # ports:
+    #   - 3000:3000
+    command: air
+    volumes:
+      - ./src/app/cli:/app/src
+    working_dir: /app/src
+    tty: true
+    # depends_on:
+    #   - mysql
   app-internal:
     container_name: gogo-app-internal
     build:
@@ -70,7 +70,7 @@ services:
       # MYSQL_PASSWORD: pandog
       # MYSQL_ROOT_PASSWORD: pandog
     ports:
-      - 33061:3306
+      - 3306:3306
   # mongo:
   #   image: mongo:3.7.5
   #   ports:

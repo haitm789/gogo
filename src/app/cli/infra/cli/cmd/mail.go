@@ -13,13 +13,41 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package cli
+package cmd
 
 import (
-	"cli/infra/cli/cmd"
+	"fmt"
+
+	"cli/adapter"
+	"cli/adapter/cli"
+	"cli/infra/database"
+
+	"github.com/spf13/cobra"
 )
 
-func Start() {
+var mailCmd = &cobra.Command{
+	Use:   "mail",
+	Short: "collections of mail commands",
+	Long:  "",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("mail called")
+	},
+}
 
-	cmd.Execute()
+func loadMailCommands() []cli.Command {
+	db := db()
+	commands := cli.MailCommands(db)
+	return commands
+}
+
+func init() {
+	for _, c := range loadMailCommands() {
+		mailCmd.AddCommand(newCmd(c))
+	}
+
+	rootCmd.AddCommand(mailCmd)
+}
+
+func db() adapter.Database {
+	return database.NewMySql()
 }

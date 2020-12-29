@@ -49,13 +49,13 @@ func newCmd(c cli.Command) *cobra.Command {
 	}
 }
 
-func loadCommands() []cli.Command {
+func loadBotCommands() []cli.Command {
 	commands := cli.SlackCommands()
 	return commands
 }
 
 func init() {
-	for _, c := range loadCommands() {
+	for _, c := range loadBotCommands() {
 		botCmd.AddCommand(newCmd(c))
 	}
 

@@ -6,6 +6,7 @@ import (
 
 type (
 	Mail interface {
-		GetByID(id int) (domain.Mail, error)
+		// GetByID(id int) (domain.Mail, error)
+		Find() ([]domain.Mail, error)
 	}
 )

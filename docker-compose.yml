@@ -13,7 +13,7 @@ services:
   #   working_dir: /app/src
   #   tty: true
   app-api:
-    container_name: gogo-app-api
+    container_name: gogo-api
     build:
       context: .
       dockerfile: docker/golang/Dockerfile
@@ -27,7 +27,7 @@ services:
     depends_on:
       - mysql
   app-cli:
-    container_name: gogo-app-cli
+    container_name: gogo-cli
     build:
       context: .
       dockerfile: docker/golang/Dockerfile
@@ -41,7 +41,7 @@ services:
     # depends_on:
     #   - mysql
   app-internal:
-    container_name: gogo-app-internal
+    container_name: gogo-internal
     build:
       context: .
       dockerfile: docker/golang/Dockerfile
@@ -71,6 +71,12 @@ services:
       # MYSQL_ROOT_PASSWORD: pandog
     ports:
       - 3306:3306
+  mailer:
+    container_name: mall-mailer
+    image: schickling/mailcatcher
+    ports:
+      - 10801:1080
+      - 10251:1025
   # mongo:
   #   image: mongo:3.7.5
   #   ports:

@@ -20,6 +20,5 @@ import (
 )
 
 func Start() {
-
 	cmd.Execute()
 }

@@ -3,6 +3,8 @@ package database
 import (
 	"fmt"
 
+	"github.com/spf13/viper"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -34,12 +36,7 @@ func connect() *gorm.DB {
 }
 
 func conn() (string, string) {
-	// dialect := os.Getenv("DB_DIALECT")
-	// username := os.Getenv("DB_USERNAME")
-	// password := os.Getenv("DB_PASSWORD")
-	// host := os.Getenv("DB_HOST")
-	// port := os.Getenv("DB_PORT")
-	// database := os.Getenv("DB_DATABASE")
+	fmt.Println("viper database:", viper.GetString("database.host"))
 
 	host := "gogo-mysql"
 	port := "3306"

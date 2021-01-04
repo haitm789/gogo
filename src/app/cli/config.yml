@@ -1,0 +1,7 @@
+database:
+  host: "gogo-mysql"
+  port: 3306
+  username: pandog
+  password: pandog
+  database: gogo
+  dialect: mysql

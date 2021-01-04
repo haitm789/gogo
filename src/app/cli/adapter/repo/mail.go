@@ -2,15 +2,16 @@ package repo
 
 import (
 	"cli/adapter"
+	"cli/adapter/database"
 	"cli/domain"
-
-	"time"
 )
 
-type Mail struct {
-	table string
-	db    adapter.Database
-}
+type (
+	Mail struct {
+		table string
+		db    adapter.Database
+	}
+)
 
 func NewMail(db adapter.Database) Mail {
 	return Mail{
@@ -19,30 +20,19 @@ func NewMail(db adapter.Database) Mail {
 	}
 }
 
-func (r Mail) GetByID(id int) (domain.Mail, error) {
+func (r Mail) Find() ([]domain.Mail, error) {
 	res := []domain.Mail{}
 
+	rs := []database.Mail{}
 	r.db.
 		Connection().
 		Table(r.table).
-		Where("send_at <= NOW() AND status = ?", 1).
-		Find(&res)
+		Where("status = ?", 1).
+		Find(&rs)
 
-	mailTemplateId := 997
-	userId := 998
-	params := "params"
-	status := 1
-	sendAt := time.Now()
-	doneAt := time.Now()
+	for _, v := range rs {
+		res = append(res, database.ToDomainMail(v))
+	}
 
-	m := domain.NewMail(
-		id,
-		mailTemplateId,
-		userId,
-		params,
-		status,
-		sendAt,
-		doneAt,
-	)
-	return m, nil
+	return res, nil
 }

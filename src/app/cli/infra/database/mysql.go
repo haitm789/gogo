@@ -39,7 +39,7 @@ func conn() (string, string) {
 	fmt.Println("viper database:", viper.GetString("database.host"))
 
 	host := "gogo-mysql"
-	port := "3306"
+	port := "33061"
 	username := "pandog"
 	password := "pandog"
 	database := "gogo"

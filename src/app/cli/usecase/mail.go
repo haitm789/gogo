@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	repository "cli/repo"
+	repository "cli/adapter/repo"
 	"fmt"
 )
 
@@ -17,5 +17,3 @@ func NewMail(repo repository.Mail) Mail {
 func (u *Mail) Send(str string) {
 	fmt.Println("slack gateway: " + str)
 }
-
-

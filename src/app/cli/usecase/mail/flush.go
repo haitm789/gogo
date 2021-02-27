@@ -1,18 +1,34 @@
 package mail
 
 import (
-	"cli/adapter/mailer"
+	// f "cli/factory/mailer"
+	mailer "cli/infra/mailer"
+	"cli/lib"
+
 	"fmt"
 )
 
 func (u *Mail) Flush() {
 	fmt.Println("flush mail")
 
-	// r, _ := u.repo.Find()
+	r, _ := u.repo.Find()
 
-	// fmt.Println(res)
+	fmt.Println(r)
 
-	mailer := mailer.NewSmtpMailer()
+	agent := lib.NewMailer(
+		mailer.NewSmtpMailer(),
+	)
 
-	mailer.Send()
+	msg := NewMailMessage(
+		"j3ns789@gmail.com",
+		"haitm789@gmail.com",
+		"mail flush",
+		"this is a mail flush.\n\npandog.",
+		[]string{},
+		[]string{},
+		[]string{},
+	)
+
+	agent.Flush(msg)
+	// m.Flush("haitm789@gmail.com", "mail flush", "this is a mail flush.\n\npandog.")
 }

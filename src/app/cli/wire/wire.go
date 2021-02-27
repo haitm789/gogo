@@ -5,20 +5,19 @@ package wire
 import (
 	"cli/adapter"
 
-	"cli/adapter/repo"
-
-	i "cli/repo"
-	usecase "cli/usecase/mail"
+	i "cli/adapter/repo"
+	r "cli/infra/repo"
+	uc "cli/usecase/mail"
 
 	"github.com/google/wire"
 )
 
-func InitializeMailUsecase(db adapter.Database) usecase.Mail {
+func InitializeMailUsecase(db adapter.Database) uc.Mail {
 	wire.Build(
-		usecase.NewMail,
-		repo.NewMail,
-		wire.Bind(new(i.Mail), new(repo.Mail)),
+		uc.NewMail,
+		r.NewMail,
+		wire.Bind(new(i.Mail), new(r.Mail)),
 	)
 
-	return usecase.Mail{}
+	return uc.Mail{}
 }

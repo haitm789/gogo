@@ -70,7 +70,7 @@ services:
       # MYSQL_PASSWORD: pandog
       # MYSQL_ROOT_PASSWORD: pandog
     ports:
-      - 33061:3306
+      - 3306:3306
   mailer:
     container_name: mall-mailer
     image: schickling/mailcatcher

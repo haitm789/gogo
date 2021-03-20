@@ -17,10 +17,8 @@ package cli
 
 import (
 	"cli/infra/cli/cmd"
-	"cli/infra/config"
 )
 
 func Start() {
-	config.Load()
 	cmd.Execute()
 }

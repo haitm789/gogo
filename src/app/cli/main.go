@@ -2,11 +2,11 @@ package main
 
 import (
 	"cli/infra/cli"
-	// "cli/infra/config"
+	"cli/infra/config"
 )
 
 func main() {
-	// config.Load()
-
+	config.Load()
 	cli.Start()
+	
 }

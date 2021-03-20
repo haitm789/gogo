@@ -18,9 +18,7 @@ package cmd
 import (
 	"fmt"
 
-	"cli/adapter"
 	"cli/adapter/cli"
-	"cli/infra/database"
 
 	"github.com/spf13/cobra"
 )
@@ -35,8 +33,7 @@ var mailCmd = &cobra.Command{
 }
 
 func loadMailCommands() []cli.Command {
-	db := db()
-	commands := cli.MailCommands(db)
+	commands := cli.MailCommands()
 	return commands
 }
 
@@ -46,8 +43,4 @@ func init() {
 	}
 
 	rootCmd.AddCommand(mailCmd)
-}
-
-func db() adapter.Database {
-	return database.NewMySql()
 }

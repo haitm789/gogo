@@ -28,6 +28,7 @@ func (*smtp) Flush(msg mail.Mail) error {
 	to := []string{msg.Recipient}
 
 	auth := auth()
+
 	err := agent.SendMail(addr, auth, from, to, makeMsg(msg))
 	fmt.Println(err)
 	return err

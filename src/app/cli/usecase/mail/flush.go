@@ -1,7 +1,6 @@
 package mail
 
 import (
-	// f "cli/factory/mailer"
 	mailer "cli/infra/mailer"
 	"cli/lib"
 
@@ -9,7 +8,7 @@ import (
 )
 
 func (u *Mail) Flush() {
-	fmt.Println("flush mail")
+	fmt.Println("uc: flush mail")
 
 	r, _ := u.repo.Find()
 
@@ -30,5 +29,4 @@ func (u *Mail) Flush() {
 	)
 
 	agent.Flush(msg)
-	// m.Flush("haitm789@gmail.com", "mail flush", "this is a mail flush.\n\npandog.")
 }
